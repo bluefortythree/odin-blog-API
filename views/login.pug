@@ -1,0 +1,18 @@
+extends layout 
+
+block content
+    if (messages.error) 
+        div #{messages.error}
+        form(action='', method='POST')
+            label(for='username') Username: 
+            input(type='text', name='username')
+            label(for='password') Password: 
+            input(type='password', name='password')
+            button(type='submit') Log in
+    else 
+        form(action='', method='POST')
+            label(for='username') Username: 
+            input(type='text', name='username')
+            label(for='password') Password: 
+            input(type='password', name='password')
+            button(type='submit') Log in
