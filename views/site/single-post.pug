@@ -1,0 +1,21 @@
+extends layout 
+
+block content
+    if (post.published === true)
+        h1 #{post.title}
+        h3 Author: #{post.author}
+        div #{post.body}
+        br
+        div Posted on: #{f.format(post.created_at)}
+        br
+        if (post.edited_at)
+            div Last updated: #{f.format(post.edited_at)}
+        br
+        a(href=`/posts/${post.id}/comments/new`) 
+            button Add comment
+        br
+        br
+        a(href=`/posts/${post.id}/comments`)
+            button View all comments
+    else 
+        div You are not authorized to view this page.

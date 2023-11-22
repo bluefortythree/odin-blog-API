@@ -1,0 +1,12 @@
+extends layout 
+
+block content 
+    form(action='', method='POST')
+        label(for='author') Author:  
+        input(type='text', value=post.author, name='author')
+        label(for='title') Title: 
+        input(type='text', value=post.title, name='title')
+        label(for='body') Body: 
+        textarea(type='text', name='body') #{post.body}
+        button(type='submit') Submit 
+

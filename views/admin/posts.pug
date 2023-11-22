@@ -1,0 +1,14 @@
+extends layout 
+
+block content 
+    for post in posts
+        a(href=`/posts/${post._id}`) 
+            h1 #{post.title}
+            h3 Author: #{post.author}
+        if (post.published)
+            div Published 
+        else   
+            div Unpublished
+        br
+        br
+        br

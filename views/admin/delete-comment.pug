@@ -1,0 +1,14 @@
+extends layout 
+
+block content
+    h3 Author: #{comment.author}
+    div #{comment.body}
+    br
+    div #{f.format(comment.created_at)}
+    br
+    if (comment.edited_at)
+        div Last updated: #{f.format(comment.edited_at)}
+    br
+    br
+    form(action="", method='post') 
+        button Delete

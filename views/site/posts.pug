@@ -1,0 +1,17 @@
+extends layout 
+
+block content
+    if (posts.length > 0)
+        for post in posts
+            a(href=`/posts/${post._id}`) 
+                h1 #{post.title}
+                h3 Author: #{post.author}
+                div #{post.body}
+                br
+                div Posted on: #{f.format(post.created_at)}
+                br
+                if (post.edited_at)
+                    div Last updated: #{f.format(post.edited_at)}
+                br
+    else 
+        div No posts were found!

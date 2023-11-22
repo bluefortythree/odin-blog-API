@@ -22,30 +22,9 @@ const register = async(req, res) => {
             expiresIn: process.env.JWT_LIFETIME
         })
         res.status(StatusCodes.CREATED).json({username, token})
-        console.log(user) 
+        // console.log(user) 
     }
 }
-
-// const login = async(req, res) => {
-//     const {username, password} = req.body
-//     const userExists = await User.findOne({username})
-//     if (!username || !password) {
-//         res.status(StatusCodes.BAD_REQUEST).json({message: 'Please provide username and password.'})
-//     } else if (!userExists) {
-//         res.status(StatusCodes.BAD_REQUEST).json({message: 'Invalid username or password.'})
-//     } else {
-//         const correctPassword = await bcrypt.compare(password, userExists.password)
-//         if (!correctPassword) {
-//             res.status(StatusCodes.BAD_REQUEST).json({message: 'Invalid username or password.'})
-//         } else {
-//             const token = jwt.sign({username}, process.env.JWT_SECRET, {
-//                 expiresIn: process.env.JWT_LIFETIME
-//             })
-//             res.status(StatusCodes.OK).cookie('token', token).json({username, token})
-//             console.log(req.headers)
-//         }
-//     }
-// }
 
 const login = async(req, res) => {
     const {username} = req.body
@@ -53,15 +32,15 @@ const login = async(req, res) => {
         expiresIn: process.env.JWT_LIFETIME
     })
     res.status(StatusCodes.OK).cookie('token', token).json({username, token})
-    console.log(req.headers)
 }
 
-const logout = (req, res) => {
+const logout = (req, res, next) => {
     const loggedIn = req.cookies.token
     if(!loggedIn) {
         throw new Error('You are already logged out!')
     } else {
         res.clearCookie('token').status(200).json({message: 'Logged out'})
+        next()
     }
 }
 

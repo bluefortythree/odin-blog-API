@@ -1,0 +1,18 @@
+extends layout 
+
+block content
+    if (comments.length > 0) 
+        for comment in comments
+
+            h3 Author: #{comment.author}
+            div #{comment.body}
+            br
+            div #{f.format(comment.created_at)}
+            br
+            if (comment.edited_at)
+                div Last updated: #{f.format(comment.edited_at)}
+            br
+            a(href=`/posts/${post.id}/comments/${comment.id}`)
+                button Edit 
+    else 
+        div There are no comments yet!
